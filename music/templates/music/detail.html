@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{% if album %}
+    {{ album.album_title }} - {{ album.artist }}
+{% else %}
+     <p>NO ALBUM AVAILABLE</p>
+{% endif %}
+</body>
+</html>
