@@ -5,10 +5,17 @@
     <title></title>
 </head>
 <body>
-{% if album %}
-    {{ album.album_title }} - {{ album.artist }}
+<img src="{{ album.album_logo }}" alt="" width="200px">
+<h1>{{ album.album_title }}</h1>
+<h3>{{ album.artist }}</h3>
+{% if album.song_set.all  %}
+    <ul>
+        {% for song in album.song_set.all %}
+            <li>{{ song.song_title }} - {{ song.file_type }}</li>
+        {% endfor %}
+    </ul>
 {% else %}
-     <p>NO ALBUM AVAILABLE</p>
+    <h3>No songs, please add some songs</h3>
 {% endif %}
 </body>
 </html>
