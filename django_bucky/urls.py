@@ -19,8 +19,13 @@ from django.contrib import admin
 
 # urlpatterns = patterns('',
 #     url(r'^admin/', admin.site.urls),
-#     url(r'^music/', include('music.urls', namespace='music')),
+#     url(r'^music/', include('music.urls', namespace='music', app_name='music')),
 # )
+
+# urlpatterns = [
+#     url(r'^admin/', admin.site.urls),
+#     url(r'^music/', include('music.urls')),
+# ]
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
