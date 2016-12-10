@@ -1,10 +1,24 @@
+<!--load the path to static files-->
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'music/css/style.css' %}">
     <meta charset="UTF-8">
     <title>{{ title }}</title>
 </head>
 <body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!--logo-->
+        <div class="navbar-header">
+            <a href="{% url 'index' %}" class="navbar-brand">Logo</a>
+        </div>
+    </div>
+</nav>
+
 {% if all_albums %}
     <ul>
         {% for album in all_albums %}
