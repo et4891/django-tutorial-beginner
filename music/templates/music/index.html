@@ -4,11 +4,30 @@
 
 {% block body %}
     {% if all_albums %}
-        <ul>
             {% for album in all_albums %}
-                <li><a href="{% url 'detail' album.id %}">{{ album.album_title }}</a></li>
+                <div>
+                 <p>{{ album.album_title }}</p>
+                <a href="{% url 'detail' album.id %}" class="btn btn-primary btn-sm">View Details</a>
+
+                <!-- edit -->
+                    <form action="{% url 'album-update' album.id %}" method="post" style="display: inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="album_id" value="{{ album.id }}">
+                        <button class="btn btn-info btn-sm" type="submit">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                    </form>
+
+                <!-- delete -->
+                    <form action="{% url 'album-delete' album.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="album_id" value="{{ album.id }}">
+                        <button class="btn btn-default btn-sm" type="submit">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </form>
+                </div>
             {% endfor %}
-        </ul>
     {% else %}
         <h2>Please add some albums, EMPTY at the moment</h2>
     {% endif %}
