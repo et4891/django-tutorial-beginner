@@ -4,30 +4,42 @@
 
 {% block body %}
     {% if all_albums %}
+        <div class="row">
             {% for album in all_albums %}
-                <div>
-                 <p>{{ album.album_title }}</p>
-                <a href="{% url 'detail' album.id %}" class="btn btn-primary btn-sm">View Details</a>
+                <div class="col-sm-4 col-lg-2">
+                    <div class="thumbnail">
 
-                <!-- edit -->
-                    <form action="{% url 'album-update' album.id %}" method="post" style="display: inline">
-                        {% csrf_token %}
-                        <input type="hidden" name="album_id" value="{{ album.id }}">
-                        <button class="btn btn-info btn-sm" type="submit">
-                            <span class="glyphicon glyphicon-edit"></span>
-                        </button>
-                    </form>
+                        <a href="{% url 'detail' album.id %}">
+                            <img src="{{ album.album_logo.url }}" alt="" class="img-responsive">
+                        </a>
 
-                <!-- delete -->
-                    <form action="{% url 'album-delete' album.id %}" method="post" style="display: inline;">
-                        {% csrf_token %}
-                        <input type="hidden" name="album_id" value="{{ album.id }}">
-                        <button class="btn btn-default btn-sm" type="submit">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </form>
+                        <div class="caption">
+                            <h2>{{ album.album_title }}</h2>
+                            <h4>{{ album.artist }}</h4>
+                            <a href="{% url 'detail' album.id %}" class="btn btn-primary btn-sm">View Details</a>
+
+                            <!-- edit -->
+                            <form action="{% url 'album-update' album.id %}" method="post" style="display: inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="album_id" value="{{ album.id }}">
+                                <button class="btn btn-info btn-sm" type="submit">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </button>
+                            </form>
+
+                            <!-- delete -->
+                            <form action="{% url 'album-delete' album.id %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="album_id" value="{{ album.id }}">
+                                <button class="btn btn-default btn-sm" type="submit">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
+        </div>
     {% else %}
         <h2>Please add some albums, EMPTY at the moment</h2>
     {% endif %}
