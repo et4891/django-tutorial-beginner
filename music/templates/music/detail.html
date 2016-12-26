@@ -10,22 +10,4 @@
     <p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
-{% if album.song_set.all %}
-    <form action="{% url 'favorite' album.id %}" method="post">
-        {% csrf_token %}
-        {% for song in album.song_set.all %}
-            <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}">
-            <label for="song{{ forloop.counter }}">
-                {{ song.song_title }}
-                {% if song.is_favorite %}
-                    <strong><em>F</em></strong>
-                {% endif %}
-            </label>
-            <hr>
-        {% endfor %}
-        <input type="submit" value="Favorite">
-    </form>
-{% else %}
-    No Songs, please add some
-{% endif %}
 {% endblock %}
