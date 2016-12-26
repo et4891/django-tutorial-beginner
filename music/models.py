@@ -12,7 +12,7 @@ class Album(models.Model):
     album_logo = models.CharField(max_length=1000)
 
     def get_absolute_url(self):
-        return reverse('music/detail.html', kwargs={'pk': self.pk})
+        return reverse('detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.artist + '-' + self.album_title + ' (id-' + str(self.id) + ')'
