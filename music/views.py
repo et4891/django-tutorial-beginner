@@ -51,9 +51,20 @@ class UserFormView(View):
             # create object from form but didn't save it into db yet
             user = form.save(commit=False)
 
-            #clean (normalized) data
+            # clean (normalized) data
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user.set_password(password)
 
             user.save()
+
+            # returns user objects if credentials are correct
+            user = authenticate(username=username, password=password)
+
+            # if user is authenticated and is active then redirect to index
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('index')
+        # if user is not authenticated then render the form page again
+        return render(request, self.template_name, {'form': form})
